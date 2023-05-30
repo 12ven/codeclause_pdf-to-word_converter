@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PDF to  WORD</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lato|Raleway|Source+Sans+Pro" rel="stylesheet">
+  <link rel= "stylesheet" type="text/css" href="pdf-to-word.css">
+</head>
+<body>
+ <!-- Navigation -->
+    <nav class="navbar ">
+        <div class="container">
+            <div class="navbar-header" style="padding-top:1px;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.php" style="padding-top:0px;">
+                  <img class="img-responsive" src="img/logo.png"></a>
+            </div>
+      
+        </div>
+    </nav>  
+
+
+
+
+    
+   <div class="middle-section">
+   
+    <div class="container" >
+  
+ 
+     <div class="col-md-12">
+      <h1> PDF  to Word</h1>
+      <h5>Convert your PDF to doc</h5>
+        <br>
+          </div>
+    <div class="col-md-12">
+
+
+        <form action="" id="pdftoword"  method="POST" enctype="multipart/form-data">
+           
+              <div class="form-group files">
+                <label>Upload Your File </label>
+                <input type="file" id="userImage" name="userImage" class="form-control" >
+                <input type="hidden" id="key" name="key" value="Gd243vdfgdfgfdgfd55554GFFDGFDGSGSDsaDSF" class="form-control" >
+                <input type="hidden" id="sfile" name="sfile" value="pdf" class="form-control" >
+                <input type="hidden" id="tfile" name="tfile" value="doc" class="form-control" >
+                <input type="hidden" id="purl" name="purl" value="<?php  echo getprocessid(); ?>" class="form-control" >
+                
+              </div>
+              
+              <center> <input type="submit" value="Upload" class="btn-bs-file btn btn-lg btn-info"></center> 
+     
+            
+          </form>
+
+    </div>
+    
+  </div>
+</div>
+  <br><br><br><br><br><br>  
+</div>
+</div>
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <br>   <br>
+        <center><img src="img/bulb 6.46.05 PM.svg" alt=""><br>
+       <b>How to compress a PDF</b>
+
+ <br> </center>
+<p >Just drag-and-drop your PDF file in the box above, wait for the compression to complete and download your file. It's that simple.</p>
+      </div>
+        <div class="col-lg-4"><br>   <br>
+ <center>
+  <img src="img/lock.svg" alt=""><br>
+       <b> Security guaranteed</b> <br></center>
+
+<p>Your files will be permanently deleted from our server after one hour. No one has access to your files and privacy is 100% guaranteed.</p>
+      </div>
+        <div class="col-lg-4">   <br>   <br>
+ <center>
+      
+       <img src="img/thumb.svg" alt=""> <br>
+       <b>Easy to use.</b> </center>
+
+<p>Drag and drop your file, wait a few seconds while it shrinks, and download it with a single click. The process is quick and secure.</p>
+      </div>
+    </div>
+   <br>   <br> 
+<hr>
+ 
+
+       <br>   <br> 
+  </div>
+</div>
+
+
+<div class="container-fluid" style="background-color:#e6e6e6;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h6 style="text-align: right;"><b>&nbsp;&nbsp;&nbsp;About &nbsp;&nbsp;&nbsp; Help  &nbsp;&nbsp;&nbsp;  Privacy and Terms</b></h6></div></div></div></div>
+
+
+
+<div class="container-fluid" >
+  <div class="container">
+    <div class="row">
+
+
+
+        <div class="col-lg-12"> 
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+<script>
+
+
+     $("#pdftoword").submit(function(e) {
+
+    var url = "api/pdf-doc.php"; // the script where you handle the form input.
+
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           //data: $("#admision1").serialize(), // serializes the form's elements.
+           type: "POST",
+data:  new FormData(this),
+contentType: false, 
+cache: false,
+processData:false,
+           beforeSend:function(){
+
+            $("#pdftoword").html("<center><span style='margin-left:60px;background:#f1f1f1'><img src='t_load.gif' width=220x150></span></center>");
+          
+           },
+          success: function(result){
+
+         //var s=result[0];
+alert(result);
+ var obj = JSON.parse(result);
+  var li=obj.p;
+   var file=obj.file;
+ //window.location.href="word-to-pdf-download.php?"+s;
+  window.location.href="pdf-doc-download.php?link="+li+"&file="+file;
+  // window.location.href="wordtopdfdownload.php?link="+result;
+}     
+               
+               
+               
+          ,
+          complete:function()
+          {
+
+
+
+          },
+
+            error:function(xhr,status,error){
+              alert(error);
+
+            }
+         });
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+});
+     </script>
+
+     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
+
+</body>
+    
+
+</html>
+
